@@ -1,6 +1,7 @@
 package com.soghiar.tasky.services.impl;
 
 
+import com.soghiar.tasky.domain.dto.TaskListDto;
 import com.soghiar.tasky.domain.entities.TaskList;
 import com.soghiar.tasky.repositories.TaskListRepository;
 import com.soghiar.tasky.services.TaskListService;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class TaskListServiceImpl implements TaskListService {
@@ -37,5 +40,10 @@ public class TaskListServiceImpl implements TaskListService {
                 now,
                 now
         ));
+    }
+
+    @Override
+    public Optional<TaskList> getTaskList(UUID id) {
+        return taskListRepository.findById(id);
     }
 }

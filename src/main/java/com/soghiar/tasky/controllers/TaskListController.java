@@ -7,6 +7,8 @@ import com.soghiar.tasky.services.TaskListService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/api/task-lists")
@@ -33,6 +35,11 @@ public class TaskListController {
         TaskList createdTaskList = taskListService.createTaskList(taskListMapper.fromDto(taskListDto));
 
         return taskListMapper.toDto(createdTaskList);
+    }
+
+    @GetMapping(path = "/{task_list_id}")
+    public Optional<TaskListDto> getTaskListById(@PathVariable("task_list_id") UUID taskListId) {
+        return taskListService.getTaskList(taskListId).map(taskListMapper::toDto);
     }
 
 }
